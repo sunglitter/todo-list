@@ -1,0 +1,620 @@
+/* 기본 스타일 초기화 */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Noto Sans KR", sans-serif;
+  justify-content: center;
+  align-items: center;
+  width: 1440px;
+  height: 1024px;
+}
+
+/* 전체 공간 */
+section {
+  display: flex;
+  align-items: center;
+  width: 1440px;
+  height: 1024px;
+}
+
+/* 왼쪽 공간 전체 */
+.left {
+  width: 824px;
+  height: 1024px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 배경사진 계절별 변경 */
+.left.spring {
+  background-image: url(../images/spring.jpg);
+  background-size: cover;
+}
+
+.left.summer {
+  background-image: url(../images/summer.jpg);
+  background-size: cover;
+}
+
+.left.fall {
+  background-image: url(../images/fall.jpg);
+  background-size: cover;
+}
+
+.left.winter {
+  background-image: url(../images/winter.jpg);
+  background-size: cover;
+}
+
+/* 달력 모양 이미지 */
+.menuImage {
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  cursor: pointer;
+}
+
+/* 왼쪽 공간 불투명 공간까지 */
+.menu {
+  background-color: rgba(60, 60, 60, 0.8);
+  width: 670px;
+  height: 1024px;
+  padding: 30px;
+  box-sizing: border-box;
+  display: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu.active {
+  display: block;
+}
+
+/* 왼쪽 공간 달력 */
+.calspace {
+  margin: 30px 15px 40px;
+  padding: 1rem 2rem 2rem;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #03505f, #6c9f9c);
+  width: 584px;
+  height: 570px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-left: 30px;
+  font-weight: 600;
+}
+
+.calendar {
+  margin: auto;
+  width: 380px;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.calhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.calendar ul li {
+  width: calc(100% / 7);
+  margin-top: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+#prev,
+#next {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#prev::before,
+#next::before {
+  content: "";
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  border-color: #ccc;
+}
+
+#next::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#prev::before {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+#prev:hover::before,
+#next:hover::before {
+  border-color: #000;
+}
+
+.days {
+  font-weight: 600;
+}
+
+.dates li {
+  cursor: pointer;
+}
+
+.dates li.selected {
+  color: #fff;
+}
+
+.dates li.selected::before {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #a00000;
+  border-radius: 50%;
+  z-index: -1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.dates li.inactive {
+  color: #ccc;
+}
+
+/* 왼쪽 공간 달력에서 일자 누르면 해당일 TODO LIST 보여주는 공간 */
+.daystdl {
+  margin: 0px 15px 0px;
+  padding: 10px 0px;
+  display: flex;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.33);
+  justify-content: center;
+  width: 584px;
+  height: 310px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.listContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 60px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 0px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(
+    to bottom,
+    rgba(21, 121, 101, 0.5),
+    rgba(78, 189, 167, 0.5)
+  );
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.categoryContainer {
+  flex: 1;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.subjectContainer {
+  flex: 2;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.addcom {
+  color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 114, 124, 0.5),
+    rgba(125, 164, 173, 0.5)
+  );
+}
+
+.addcoms {
+  text-decoration: line-through;
+}
+
+.blankimage {
+  position: absolute;
+  left: 120px;
+  bottom: 120px;
+}
+
+/* 오른쪽 공간 전체 */
+.right {
+  width: 616px;
+  height: 1024px;
+}
+
+/* 오른쪽 공간 여백 마진으로 빼기 */
+.rightWrap {
+  width: 469px;
+  height: 941px;
+  margin: 53px 46px 30px 101px;
+}
+
+/* 카테고리 선택, 이름으로 찾기 공간 분리 */
+.ctgrandsearch {
+  width: 469px;
+  height: 64px;
+  align-items: center;
+  margin-top: 53px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+/* 카테고리 선택 공간 */
+.category {
+  float: left;
+  width: 241px;
+  height: 65px;
+}
+
+/* 카테고리 선택 버튼 */
+.selctg {
+  float: left;
+  width: 160px;
+  height: 65px;
+  margin-left: 67px;
+  margin-right: 14px;
+  border: 0px solid;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #6295a2, #97bdbb);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: #23353a;
+  box-sizing: border-box;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 이름으로 찾기 공간 */
+.sbn {
+  float: left;
+  margin-right: 26px;
+  padding: 16px 5px;
+  width: 228px;
+  height: 65px;
+  border: 1px solid black;
+  border-radius: 10px;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 이름으로 찾기 텍스트 입력(input) */
+.sbn-text {
+  float: left;
+  width: 158px;
+  height: 33px;
+  border: 0px solid;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+/* 이름으로 찾기 버튼 */
+.search-btn {
+  float: left;
+  width: 15px;
+  height: 15px;
+  background: url(../images/search.png) no-repeat;
+  border: 0px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+/* TODO LIST 추가 및 추가된 목록 확인 공간 */
+.tdwrap {
+  width: 485px;
+  height: 700px;
+  background: linear-gradient(to bottom, #c2e0ba, #d7e9d2);
+  padding: 15px 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* TODO LIST 추가 공간 */
+.addtdl {
+  width: 430px;
+  height: 90px;
+  background: linear-gradient(to bottom, #80b9ad, #a5ccc4);
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* TODO LIST 내용 입력 공간 */
+.item {
+  float: left;
+  width: 332px;
+  height: 54px;
+  background-color: white;
+  border: 0px;
+  border-radius: 50px;
+  margin: 18px 7px 18px 33px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+/* TODO LIST 추가 버튼 */
+.add-button {
+  float: left;
+  width: 40px;
+  height: 40px;
+  background: url(../images/addbtn.png) no-repeat;
+  border: 0px;
+  margin: 25px 0px;
+  cursor: pointer;
+}
+
+/* TODO LIST 추가 공간과 추가된 목록을 분리하는 영역 */
+.line {
+  margin: 25px 40px;
+}
+
+/* TODO LIST 추가된 목록 감싸는 영역 */
+.addedtdl-wrap {
+  width: 450px;
+  height: 528px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.addedtdl-container {
+  width: 430px;
+  height: 220px;
+}
+
+/* TODO LIST 추가된 목록 영역 */
+.addedtdl {
+  width: 430px;
+  height: 220px;
+  margin: 20px 0px;
+  border: 0px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #157965, #4ebda7);
+  padding: 11px 21px 11px 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* TODO LIST 추가된 목록 정보 출력 영역 */
+.adtleft {
+  float: left;
+  width: 329px;
+  height: 198px;
+}
+
+/* TODO LIST 추가된 목록 카테고리 및 날짜 영역 */
+.ctganddate {
+  width: 329px;
+  height: 54px;
+}
+
+/* TODO LIST 추가된 목록 카테고리 영역 */
+.addedctg {
+  float: left;
+  width: 109px;
+  height: 54px;
+  background-color: white;
+  border: 0px;
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 14.5px 0px;
+  font-size: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* TODO LIST 추가된 목록 날짜 영역 */
+.addeddate {
+  float: left;
+  display: flex;
+  width: 120px;
+  height: 54px;
+  background-color: white;
+  border: 0px;
+  border-radius: 10px;
+  margin-right: 80px;
+  padding: 14.5px 0px;
+  font-size: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* 날짜 선택기 관련 */
+.drp-calendar.left.single {
+  display: flex;
+  width: 270px;
+  height: 240px;
+}
+
+/* TODO LIST 추가된 목록 내용 영역 */
+.subject {
+  width: 329px;
+  height: 130px;
+  background-color: white;
+  border: 0px;
+  border-radius: 10px;
+  margin-top: 14px;
+  padding: 5px;
+  font-size: 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+
+/* TODO LIST 추가된 목록 버튼 영역 */
+.adtright {
+  float: right;
+  width: 47px;
+  height: 198px;
+  flex-direction: column;
+  margin-left: 13px;
+  padding: auto;
+}
+
+/* TODO LIST 추가된 목록 여백 제외한 버튼 영역 */
+.btns {
+  width: 30px;
+  height: 144px;
+  flex-direction: column;
+  margin: 33px 9px 21px 8px;
+}
+
+/* TODO LIST 추가된 목록 완료 버튼(기본 - 안눌림) */
+.tdl-checkbox {
+  width: 30px;
+  height: 30px;
+  background: url(../images/checkbox.png) no-repeat;
+  background-size: 30px 30px;
+  border: 0px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* 완료된 항목 스타일 */
+.addedtdl.completed {
+  background: linear-gradient(to bottom, #4b727c, #7da4ad);
+}
+
+.addedctg.completed {
+  background-color: #bbbbbb;
+}
+
+.addeddate.completed {
+  background-color: #bbbbbb;
+  pointer-events: none;
+}
+
+.subject.completed {
+  background-color: #bbbbbb;
+  text-decoration: line-through #000000;
+}
+
+/* TODO LIST 추가된 목록 수정 버튼(기본 - 안눌림) */
+.tdl-modify {
+  width: 30px;
+  height: 30px;
+  margin: 27px 0px;
+  background: url(../images/modify.png) no-repeat;
+  background-size: 30px 30px;
+  border: 0px;
+  cursor: pointer;
+}
+
+/* TODO LIST 추가된 목록 삭제 버튼 */
+.tdl-remove {
+  width: 30px;
+  height: 30px;
+  background: url(../images/remove.png) no-repeat;
+  background-size: 30px 30px;
+  border: 0px;
+  cursor: pointer;
+}
+
+/* TODO LIST 전체 목록 진행 상태 영역 */
+.status {
+  width: 469px;
+  height: 87px;
+  margin-top: 80px;
+  display: flex;
+}
+
+/* TODO LIST 전체 목록 중 완료 영역(텍스트) */
+.comtasks {
+  float: left;
+  width: 208px;
+  height: 87px;
+  background: linear-gradient(to bottom, #4b727c, #7da4ad);
+  color: white;
+  border-radius: 10px;
+  margin-left: 18px;
+  margin-right: 17px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* TODO LIST 전체 목록 중 완료 영역(카운트) */
+.comtcount {
+  color: white;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* TODO LIST 전체 목록 중 미완료 영역(텍스트) */
+.pendtasks {
+  float: left;
+  width: 208px;
+  height: 87px;
+  background: linear-gradient(to bottom, #157965, #4ebda7);
+  color: white;
+  border-radius: 10px;
+  margin-right: 18px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* TODO LIST 전체 목록 중 미완료 영역(카운트) */
+.pendtcount {
+  color: white;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+}
